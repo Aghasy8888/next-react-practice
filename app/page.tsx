@@ -1,14 +1,9 @@
-import { fetchInfo } from '@/lib/fetchInfo';
-import { ShowData } from './components';
+import { App } from "@/components";
 
-import styles from './page.module.css';
-
-export default async function Home() {
-  const info = await fetchInfo();
-
+export default function Home() {
   return (
-    <main className={styles.main}>
-      <ShowData anyData={info} />
+    <main className="py-5 px-3">
+      <App />
     </main>
   );
 }

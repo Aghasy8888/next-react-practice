@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import generalReducer from "./features/generalSlice";
+import generalSlice from "./features/generalSlice";
 
 import logger from 'redux-logger';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
-            generalReducer,
+            generalSlice,
         },
         middleware: (getDefaultMiddleware) => 
         process.env.NODE_ENV === "development" 
