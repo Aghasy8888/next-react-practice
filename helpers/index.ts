@@ -1,32 +1,46 @@
+import { CORRECT, INCORRECT } from '@/constants';
+
 type StackEntry = {
   start: number;
-  combo: number[];
+  combo: Odds[];
 };
 
-function getCombinations(arr: number[], length: number) {
-    const result: number[][] = [];
-    const stack: StackEntry[] = [];
+export function getCombinations(arr: Odds[], length: number) {
+  const result: Odds[][] = [];
+  const stack: StackEntry[] = [];
 
-    stack.push({ start: 0, combo: [] });
+  stack.push({ start: 0, combo: [] });
 
-    while (stack.length) {
-      const { start, combo } = stack.pop() as StackEntry;
+  while (stack.length) {
+    const { start, combo } = stack.pop() as StackEntry;
 
-      if (combo.length === length) {
-        result.push([...combo]);
-        continue;
-      }
-
-      for (let i = start; i < arr.length; i++) {
-        stack.push({ start: i + 1, combo: [...combo, arr[i]] });
-      }
+    if (combo.length === length) {
+      result.push([...combo]);
+      continue;
     }
 
-    return result;
+    for (let i = start; i < arr.length; i++) {
+      stack.push({ start: i + 1, combo: [...combo, arr[i]] });
+    }
   }
 
-export function generateCombinations(allOdds: Odds[], combinationsCount: number) {
-  const oddsValues = allOdds.map((odds) => odds.value);  
-
-  return getCombinations(oddsValues, combinationsCount);
+  return result;
 }
+
+export function getOddsOfCombination(odds: Odds[]): number {
+  return odds.reduce((accumulator, currentValue) => {
+    if (currentValue.status === INCORRECT) return 0;
+
+    return (
+      accumulator * (currentValue.status === CORRECT ? currentValue.value : 1)
+    );
+  }, 1);
+}
+
+export const fetchPosts = async (page: number, limit: number) => {
+  const posts = await fetch(
+    `https://jsonplaceholder.typicode.com/posts?page=${page}&limit=${limit}`
+  );
+
+  return posts.json();
+};

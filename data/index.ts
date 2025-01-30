@@ -1,8 +1,8 @@
-import { CORRECT, VOID } from '@/constants';
+import { CORRECT, INCORRECT, VOID } from '@/constants';
 
 export const bettingSystem: BettingSystem = {
-  combinationsCount: 2,
-  oddsCount: 3,
+  combinationsLength: 5,
+  oddsCount: 6,
 };
 
 export const allOdds: Odds[] = [
@@ -17,6 +17,18 @@ export const allOdds: Odds[] = [
   },
   {
     status: VOID,
+    value: 5.00,
+  },
+  {
+    status: CORRECT,
+    value: 8.00,
+  },
+  {
+    status: CORRECT,
+    value: 3.00,
+  },
+  {
+    status: INCORRECT,
     value: 4.00,
   },
 ];

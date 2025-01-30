@@ -1,5 +1,5 @@
 type BettingSystem = {
-  combinationsCount: number;
+  combinationsLength: number;
   oddsCount: number;
 };
 
